@@ -7,7 +7,7 @@ import { useConvexAuth, useMutation } from "convex/react";
 export default function HomePage() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const { isLoaded, signUp } = useSignUp();
+  const { isLoaded, signUp, setActive } = useSignUp();
   const { isLoading, isAuthenticated } = useConvexAuth();
 
   const createNewUser = useMutation(api.user.setInitialUserUp);
@@ -23,10 +23,13 @@ export default function HomePage() {
       return;
     }
     console.log("hi");
-    await signUp.create({
+    const completedSignUp = await signUp.create({
       username: username,
       password: password,
     });
+
+    await setActive({ session: completedSignUp.createdSessionId });
+
     void createNewUser({});
   }
 
