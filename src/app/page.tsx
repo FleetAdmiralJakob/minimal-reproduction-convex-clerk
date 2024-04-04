@@ -58,8 +58,12 @@ export default function HomePage() {
           </button>
         </form>
         <SignOutButton />
-        <span className="text-white">isSignedIn: {isAuthenticated}</span>
-        <span className="text-white">isLoading: {isLoading}</span>
+        <span className="text-white">
+          isSignedIn: {isAuthenticated ? "true" : "false"}
+        </span>
+        <span className="text-white">
+          isLoading: {isLoading ? "true" : "false"}
+        </span>
       </div>
     </main>
   );
